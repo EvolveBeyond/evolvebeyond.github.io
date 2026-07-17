@@ -33,12 +33,9 @@
     /* ── Axolotl background ── */
     .bg-axolotl {
       position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(80vw, 700px);
-      height: min(80vw, 700px);
-      background: url('axolotl.png') center/contain no-repeat;
-      opacity: 0.06;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('axolotl.png') center/cover no-repeat;
+      opacity: 0.12;
       pointer-events: none;
       z-index: 0;
       filter: grayscale(1);
@@ -53,8 +50,8 @@
       z-index: 100;
     }
     .nav-inner {
-      max-width: 1200px; margin: 0 auto; height: 100%;
-      padding: 0 1rem;
+      width: 100%; height: 100%;
+      padding: 0 1.5rem;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
@@ -73,8 +70,8 @@
     /* ── Bento ── */
     .bento {
       position: relative; z-index: 1;
-      max-width: 1200px; margin: 0 auto;
-      padding: 48px 1px 0;
+      width: 100%;
+      padding: 48px 0 0;
       display: flex; flex-direction: column;
       gap: 1px;
       background: var(--border);
