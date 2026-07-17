@@ -3,45 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EvolveBeyond</title>
+  <title>EvolveBeyond — Beyond Evolution</title>
   <meta name="description" content="EvolveBeyond — Open source projects that evolve beyond the ordinary">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦎</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #fafafa;
-      --fg: #0a0a0a;
-      --fg-muted: #666;
-      --border: #e5e5e5;
-      --surface: #fff;
-      --black: #0a0a0a;
-    }
-    [data-theme="dark"] {
-      --bg: #0a0a0a;
-      --fg: #ededed;
-      --fg-muted: #888;
-      --border: #222;
-      --surface: #111;
-      --black: #ededed;
+      --bg: #0c0c0e;
+      --fg: #e8e6e3;
+      --fg-muted: #7a7572;
+      --border: #1e1e20;
+      --surface: #131315;
+      --accent: #c4625a;
+      --accent-dim: rgba(196, 98, 90, 0.08);
+      --accent-glow: rgba(196, 98, 90, 0.15);
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--fg);
-      line-height: 1.5;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    /* ── Axolotl background ── */
+    .axolotl-bg {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 900px;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .axolotl-bg svg { width: 100%; height: 100%; }
 
     /* ── Nav ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; height: 56px;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      background: rgba(12, 12, 14, 0.8);
+      backdrop-filter: blur(20px);
       z-index: 100;
     }
     .nav-inner {
@@ -50,132 +58,212 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--fg);
+    }
+    .nav-logo-icon {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 100%; height: 100%; }
+    .nav-logo-text {
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 500; font-size: 0.9rem;
-      color: var(--fg); text-decoration: none;
+      font-weight: 500; font-size: 0.85rem;
       letter-spacing: -0.02em;
     }
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a {
       color: var(--fg-muted); text-decoration: none;
-      font-size: 0.8rem; font-weight: 400; transition: color 0.15s;
+      font-size: 0.8rem; transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--fg); }
-    .theme-btn {
-      width: 28px; height: 28px; border-radius: 6px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--fg-muted); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-    }
-    .theme-btn:hover { border-color: var(--fg); color: var(--fg); }
 
-    /* ── Main ── */
-    .main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ── Main container ── */
+    .main {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
     /* ── Hero ── */
     .hero {
-      padding: 8rem 0 5rem;
+      padding: 10rem 0 6rem;
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.3rem 0.8rem; border-radius: 999px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(196, 98, 90, 0.12);
+      font-size: 0.7rem; color: var(--accent);
+      font-weight: 500; letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .hero-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .hero h1 {
-      font-size: 3rem; font-weight: 300;
-      letter-spacing: -0.04em; line-height: 1.1;
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; letter-spacing: -0.04em;
+      line-height: 1.1; margin-bottom: 2rem;
+      max-width: 700px;
     }
-    .hero h1 strong { font-weight: 600; }
-    .hero p {
+    .hero h1 strong { font-weight: 700; color: var(--accent); }
+    .hero-desc {
       font-size: 1.05rem; color: var(--fg-muted);
-      max-width: 500px; line-height: 1.7;
+      max-width: 520px; line-height: 1.8;
       font-weight: 300;
     }
 
-    /* ── Projects ── */
-    .projects { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    /* ── Roadmap ── */
+    .roadmap {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .roadmap-line {
+      position: absolute;
+      left: 24px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--accent-dim), var(--border), var(--accent-dim), transparent);
+    }
     .section-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--fg-muted);
-      margin-bottom: 2.5rem;
+      font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--fg-muted);
+      margin-bottom: 3rem;
+      padding-left: 3rem;
+    }
+
+    /* ── Milestone ── */
+    .milestone {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .milestone:last-child { margin-bottom: 0; }
+    .milestone-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+    }
+    .milestone-dot--filled { background: var(--accent); }
+    .milestone-content { padding-left: 1rem; }
+    .milestone-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .milestone h3 {
+      font-size: 1.1rem; font-weight: 500;
+      letter-spacing: -0.01em; margin-bottom: 0.5rem;
+    }
+    .milestone p {
+      font-size: 0.85rem; color: var(--fg-muted);
+      line-height: 1.7; font-weight: 300;
+      max-width: 600px;
+    }
+
+    /* ── Values ── */
+    .values {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .value { padding: 1.5rem 0; }
+    .value-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .value h3 {
+      font-size: 0.95rem; font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .value p {
+      font-size: 0.8rem; color: var(--fg-muted);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── Projects ── */
+    .projects {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
     }
     .project-list { display: flex; flex-direction: column; }
     .project {
-      display: grid; grid-template-columns: 1fr auto;
-      align-items: center; padding: 1.5rem 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--border);
       text-decoration: none; color: var(--fg);
       transition: opacity 0.15s;
     }
     .project:last-child { border-bottom: none; }
-    .project:hover { opacity: 0.7; }
-    .project-name {
-      font-size: 1.1rem; font-weight: 500;
-      letter-spacing: -0.01em;
+    .project:hover { opacity: 0.6; }
+    .project-left { display: flex; align-items: center; gap: 1rem; }
+    .project-icon {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      background: var(--accent-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
     }
+    .project-name { font-size: 0.9rem; font-weight: 500; }
     .project-desc {
-      font-size: 0.85rem; color: var(--fg-muted);
-      margin-top: 0.25rem; font-weight: 300;
+      font-size: 0.75rem; color: var(--fg-muted);
+      font-weight: 300;
     }
-    .project-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--fg-muted);
-      text-align: right;
+    .project-arrow {
+      color: var(--fg-muted); font-size: 0.8rem;
+      transition: color 0.15s;
     }
+    .project:hover .project-arrow { color: var(--fg); }
 
-    /* ── Principles ── */
-    .principles { padding: 5rem 0; border-bottom: 1px solid var(--border); }
-    .principles-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-    }
-    .principle {}
-    .principle-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--fg-muted);
-      margin-bottom: 0.75rem;
-    }
-    .principle h3 {
-      font-size: 0.95rem; font-weight: 500;
-      margin-bottom: 0.5rem; letter-spacing: -0.01em;
-    }
-    .principle p {
-      font-size: 0.8rem; color: var(--fg-muted);
-      line-height: 1.6; font-weight: 300;
-    }
-
-    /* ── Code ── */
-    .code-section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
-    .code-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px; overflow: hidden;
-      max-width: 700px;
-    }
-    .code-header {
-      padding: 0.5rem 1rem;
+    /* ── CTA ── */
+    .cta {
+      padding: 6rem 0;
+      text-align: center;
       border-bottom: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--fg-muted);
     }
-    .code-content {
-      padding: 1.25rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem; line-height: 1.8;
-      overflow-x: auto;
+    .cta h2 {
+      font-size: 1.8rem; font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
     }
-    .code-content .kw { color: #666; }
-    .code-content .str { color: #444; }
-    .code-content .fn { color: #222; }
-    [data-theme="dark"] .code-content .kw { color: #888; }
-    [data-theme="dark"] .code-content .str { color: #aaa; }
-    [data-theme="dark"] .code-content .fn { color: #ccc; }
+    .cta h2 strong { font-weight: 600; color: var(--accent); }
+    .cta p {
+      font-size: 0.9rem; color: var(--fg-muted);
+      margin-bottom: 2rem; font-weight: 300;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: 8px;
+      background: var(--accent); color: #0c0c0e;
+      text-decoration: none; font-size: 0.85rem;
+      font-weight: 600; transition: all 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
     /* ── Footer ── */
     .footer {
-      padding: 3rem 0;
+      padding: 2.5rem 0;
       display: flex; justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem; color: var(--fg-muted);
+      font-size: 0.7rem; color: var(--fg-muted);
     }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a {
@@ -185,29 +273,74 @@
     .footer-links a:hover { color: var(--fg); }
 
     @media (max-width: 768px) {
+      .hero { padding: 7rem 0 4rem; }
       .hero h1 { font-size: 2rem; }
-      .principles-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .project { grid-template-columns: 1fr; gap: 0.25rem; }
-      .project-meta { text-align: left; }
+      .values-grid { grid-template-columns: 1fr; }
+      .milestone { grid-template-columns: 32px 1fr; }
+      .roadmap-line { left: 16px; }
+      .section-label { padding-left: 2rem; }
       .nav-links { display: none; }
-      .footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer { flex-direction: column; gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Axolotl background -->
+  <div class="axolotl-bg">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axolotl silhouette -->
+      <ellipse cx="200" cy="180" rx="80" ry="50" fill="currentColor"/>
+      <ellipse cx="200" cy="260" rx="60" ry="80" fill="currentColor"/>
+      <!-- Head -->
+      <ellipse cx="200" cy="140" rx="70" ry="55" fill="currentColor"/>
+      <!-- Eyes -->
+      <circle cx="170" cy="125" r="12" fill="var(--bg)"/>
+      <circle cx="230" cy="125" r="12" fill="var(--bg)"/>
+      <circle cx="170" cy="125" r="5" fill="currentColor"/>
+      <circle cx="230" cy="125" r="5" fill="currentColor"/>
+      <!-- Gills (left) -->
+      <path d="M130 120 Q100 90 80 100" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M125 135 Q90 115 70 130" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M120 150 Q85 140 65 155" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Gills (right) -->
+      <path d="M270 120 Q300 90 320 100" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M275 135 Q310 115 330 130" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M280 150 Q315 140 335 155" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Tail -->
+      <path d="M200 340 Q180 370 160 360 Q140 350 150 330" stroke="currentColor" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Front legs -->
+      <path d="M150 200 Q120 220 110 250" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M250 200 Q280 220 290 250" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <!-- Toes -->
+      <circle cx="105" cy="255" r="4" fill="currentColor"/>
+      <circle cx="115" cy="260" r="4" fill="currentColor"/>
+      <circle cx="285" cy="255" r="4" fill="currentColor"/>
+      <circle cx="295" cy="260" r="4" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <!-- Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">evolvebeyond</a>
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="13" rx="7" ry="5" fill="var(--accent)"/>
+            <circle cx="13" cy="12" r="1.5" fill="var(--bg)"/>
+            <circle cx="19" cy="12" r="1.5" fill="var(--bg)"/>
+            <path d="M9 12 Q5 8 4 10" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M23 12 Q27 8 28 10" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="16" cy="20" rx="5" ry="7" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <span class="nav-logo-text">evolvebeyond</span>
+      </a>
       <div class="nav-links">
+        <a href="#roadmap">Roadmap</a>
         <a href="#projects">Projects</a>
         <a href="https://github.com/EvolveBeyond">GitHub</a>
       </div>
-      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-      </button>
     </div>
   </nav>
 
@@ -215,8 +348,78 @@
 
     <!-- Hero -->
     <section class="hero">
-      <h1>We build tools that<br><strong>evolve beyond</strong><br>the ordinary.</h1>
-      <p>Open source projects focused on rethinking how developers build software. No hype, just better tools.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        open source
+      </div>
+      <h1>We build tools that <strong>evolve beyond</strong> what's possible.</h1>
+      <p class="hero-desc">
+        Our team selects projects where real change happens — not incremental improvements, but paradigm shifts. Each tool we build pushes open source further than it's been before.
+      </p>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap" id="roadmap">
+      <div class="roadmap-line"></div>
+      <div class="section-label">Our Roadmap</div>
+
+      <div class="milestone">
+        <div class="milestone-dot milestone-dot--filled"></div>
+        <div class="milestone-content">
+          <div class="milestone-label">2024 — Founded</div>
+          <h3>Starting with intent</h3>
+          <p>We began with a simple question: what if your data model could carry its own infrastructure policy? That question became EVOID — the world's first Intent-Oriented Programming runtime.</p>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot milestone-dot--filled"></div>
+        <div class="milestone-content">
+          <div class="milestone-label">2025 — Expanding</div>
+          <h3>Beyond programming</h3>
+          <p>Intent-orientation isn't just for code. We're applying the same principle to networking, infrastructure, and developer tools. Every project we touch gets the same treatment: declare intent, let the system handle the rest.</p>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot milestone-dot--filled"></div>
+        <div class="milestone-content">
+          <div class="milestone-label">2026 — Now</div>
+          <h3>Building the ecosystem</h3>
+          <p>EVOID is maturing. XRayMOD is redefining proxy management. We're creating an ecosystem where intent-driven tools work together — where your infrastructure adapts to your needs, not the other way around.</p>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot"></div>
+        <div class="milestone-content">
+          <div class="milestone-label">Future</div>
+          <h3>Intent-Driven Everything</h3>
+          <p>Our vision: a world where developers declare what they want, and systems figure out how. From programming to networking to infrastructure — intent becomes the universal interface.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values">
+      <div class="section-label">How We Think</div>
+      <div class="values-grid">
+        <div class="value">
+          <div class="value-num">01</div>
+          <h3>Paradigm shifts over patches</h3>
+          <p>We don't fix symptoms. We rethink the problem. If a tool can be improved by 10%, we ask if it should be replaced entirely.</p>
+        </div>
+        <div class="value">
+          <div class="value-num">02</div>
+          <h3>Open source as default</h3>
+          <p>Everything we build is open. Transparent development, community-driven, no vendor lock-in. The best tools are the ones everyone can use.</p>
+        </div>
+        <div class="value">
+          <div class="value-num">03</div>
+          <h3>Intent over mechanics</h3>
+          <p>Declare what you want. Let the system figure out how. We build tools that focus on intent, not the plumbing underneath.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Projects -->
@@ -224,80 +427,56 @@
       <div class="section-label">Projects</div>
       <div class="project-list">
         <a href="https://github.com/EvolveBeyond/EVOID" class="project">
-          <div>
-            <div class="project-name">EVOID</div>
-            <div class="project-desc">Intent-Oriented Programming Runtime</div>
+          <div class="project-left">
+            <div class="project-icon">🧠</div>
+            <div>
+              <div class="project-name">EVOID</div>
+              <div class="project-desc">Intent-Oriented Programming Runtime</div>
+            </div>
           </div>
-          <div class="project-meta">Python · v0.3.3</div>
+          <div class="project-arrow">→</div>
         </a>
         <a href="https://github.com/EvolveBeyond/XRayMOD" class="project">
-          <div>
-            <div class="project-name">XRayMOD</div>
-            <div class="project-desc">Modular proxy management panel</div>
+          <div class="project-left">
+            <div class="project-icon">🛡️</div>
+            <div>
+              <div class="project-name">XRayMOD</div>
+              <div class="project-desc">Modular proxy management panel</div>
+            </div>
           </div>
-          <div class="project-meta">TypeScript · React</div>
+          <div class="project-arrow">→</div>
         </a>
         <a href="https://github.com/EvolveBeyond/NvPak" class="project">
-          <div>
-            <div class="project-name">NvPak</div>
-            <div class="project-desc">Zen-modernized Neovim configuration</div>
+          <div class="project-left">
+            <div class="project-icon">✨</div>
+            <div>
+              <div class="project-name">NvPak</div>
+              <div class="project-desc">Zen-modernized Neovim configuration</div>
+            </div>
           </div>
-          <div class="project-meta">Lua · 104 ★</div>
+          <div class="project-arrow">→</div>
         </a>
         <a href="https://github.com/EvolveBeyond/EasyMQL" class="project">
-          <div>
-            <div class="project-name">EasyMQL</div>
-            <div class="project-desc">MetaTrader 5 indicator & EA library</div>
+          <div class="project-left">
+            <div class="project-icon">📊</div>
+            <div>
+              <div class="project-name">EasyMQL</div>
+              <div class="project-desc">MetaTrader 5 indicator library</div>
+            </div>
           </div>
-          <div class="project-meta">MQL5</div>
+          <div class="project-arrow">→</div>
         </a>
       </div>
     </section>
 
-    <!-- Principles -->
-    <section class="principles">
-      <div class="section-label">How we work</div>
-      <div class="principles-grid">
-        <div class="principle">
-          <div class="principle-num">01</div>
-          <h3>Intent over implementation</h3>
-          <p>Declare what you want. Let the system figure out how. We build tools that focus on intent, not mechanics.</p>
-        </div>
-        <div class="principle">
-          <div class="principle-num">02</div>
-          <h3>Bring your own</h3>
-          <p>We provide interfaces, you bring your library. Pydantic or msgspec? FastAPI or Robyn? Your choice.</p>
-        </div>
-        <div class="principle">
-          <div class="principle-num">03</div>
-          <h3>Open by default</h3>
-          <p>Every project is open source. Transparent development, community-driven, no vendor lock-in.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Code -->
-    <section class="code-section">
-      <div class="section-label">Example</div>
-      <div class="code-block">
-        <div class="code-header">api.py</div>
-        <div class="code-content">
-<span class="kw">from</span> evoid.native <span class="kw">import</span> create_service, on<br>
-<span class="kw">from</span> evoid <span class="kw">import</span> Intent, Level<br>
-<br>
-app = <span class="fn">create_service</span>(<span class="str">"my-api"</span>)<br>
-<br>
-GET_USER = <span class="fn">Intent</span>(<br>
-&nbsp;&nbsp;name=<span class="str">"GET:/users/{id}"</span>,<br>
-&nbsp;&nbsp;level=Level.STANDARD,<br>
-)<br>
-<br>
-<span class="kw">async def</span> <span class="fn">handle</span>(intent):<br>
-&nbsp;&nbsp;<span class="kw">return</span> {<span class="str">"id"</span>: intent.metadata[<span class="str">"path_params"</span>][<span class="str">"id"</span>]}<br>
-<br>
-<span class="fn">on</span>(app, GET_USER, handle)
-        </div>
-      </div>
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Ready to <strong>evolve</strong>?</h2>
+      <p>Join us in building the future of open source.</p>
+      <a href="https://github.com/EvolveBeyond" class="cta-btn">
+        View on GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </section>
 
     <!-- Footer -->
@@ -311,17 +490,5 @@ GET_USER = <span class="fn">Intent</span>(<br>
     </footer>
 
   </main>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    }
-    if (localStorage.getItem('theme') === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  </script>
 </body>
 </html>
