@@ -33,12 +33,14 @@
     /* ── Axolotl background ── */
     .bg-axolotl {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('axolotl.png') center/cover no-repeat;
-      opacity: 0.15;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vmin;
+      height: 80vmin;
+      opacity: 0.08;
       pointer-events: none;
       z-index: 0;
-      filter: invert(1) grayscale(1);
+      object-fit: contain;
     }
 
     /* ── Nav ── */
@@ -93,7 +95,7 @@
     }
     .cell:hover { background: var(--cell-hover); }
 
-    /* ── Hero cell ── */
+    /* ── Hero ── */
     .cell-hero {
       grid-column: 1 / -1;
       padding: 6rem 3rem;
@@ -127,7 +129,7 @@
       font-weight: 300;
     }
 
-    /* ── Values row (3 cols) ── */
+    /* ── Values ── */
     .row-3 { grid-template-columns: repeat(3, 1fr); }
     .cell-value { padding: 2rem; }
     .cell-num {
@@ -149,7 +151,7 @@
       font-weight: 300;
     }
 
-    /* ── Roadmap row ── */
+    /* ── Roadmap ── */
     .row-roadmap { grid-template-columns: 1fr; }
     .cell-roadmap { padding: 3rem; }
     .roadmap-grid {
@@ -158,7 +160,13 @@
       gap: 2rem;
       margin-top: 1.5rem;
     }
-    .roadmap-item {}
+    .roadmap-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--fg-dim);
+      margin-bottom: 0.75rem;
+    }
+    .roadmap-dot--active { background: var(--fg); }
     .roadmap-year {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.6rem;
@@ -176,15 +184,8 @@
       line-height: 1.6;
       font-weight: 300;
     }
-    .roadmap-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--fg-dim);
-      margin-bottom: 0.75rem;
-    }
-    .roadmap-dot--active { background: var(--fg); }
 
-    /* ── Projects row ── */
+    /* ── Projects ── */
     .row-projects { grid-template-columns: 1fr 1fr; }
     .cell-project {
       padding: 2rem;
@@ -212,24 +213,60 @@
       margin-top: 1rem;
     }
 
-    /* ── Code row ── */
-    .row-code { grid-template-columns: 1fr 1fr; }
-    .cell-code { padding: 2rem; }
-    .code-block {
+    /* ── EVOID spotlight ── */
+    .row-spotlight { grid-template-columns: 1fr; }
+    .cell-spotlight {
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .spotlight-text h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .spotlight-text p {
+      font-size: 0.85rem;
+      color: var(--fg-dim);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .spotlight-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .spotlight-link {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--fg);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .spotlight-link:hover {
+      border-color: var(--fg-dim);
+      background: var(--cell-hover);
+    }
+    .spotlight-code {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
       overflow: hidden;
-      margin-top: 1rem;
     }
-    .code-header {
+    .spotlight-code-header {
       padding: 0.4rem 0.75rem;
       border-bottom: 1px solid var(--border);
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.6rem;
       color: var(--fg-dim);
     }
-    .code-body {
+    .spotlight-code-body {
       padding: 1rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
@@ -237,20 +274,8 @@
       color: #999;
       overflow-x: auto;
     }
-    .cell-about h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-    .cell-about p {
-      font-size: 0.8rem;
-      color: var(--fg-dim);
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 0.75rem;
-    }
 
-    /* ── Footer row ── */
+    /* ── Footer ── */
     .row-footer { grid-template-columns: 1fr; }
     .cell-footer {
       padding: 1.5rem 2rem;
@@ -268,11 +293,10 @@
     }
     .footer-links a:hover { color: var(--fg); }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       .row-3 { grid-template-columns: 1fr; }
       .row-projects { grid-template-columns: 1fr; }
-      .row-code { grid-template-columns: 1fr; }
+      .cell-spotlight { grid-template-columns: 1fr; }
       .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
       .cell-hero { padding: 4rem 1.5rem; }
       .nav-links { display: none; }
@@ -282,8 +306,8 @@
 </head>
 <body>
 
-  <!-- Axolotl background -->
-  <div class="bg-axolotl"></div>
+  <!-- Axolotl background (img tag, not CSS background) -->
+  <img src="axolotl.png" alt="" class="bg-axolotl" aria-hidden="true">
 
   <!-- Nav -->
   <nav class="nav">
@@ -301,7 +325,7 @@
   <!-- Bento Grid -->
   <div class="bento">
 
-    <!-- Row 1: Hero (full width) -->
+    <!-- Row 1: Hero -->
     <div class="bento-row">
       <div class="cell cell-hero">
         <div class="hero-label">open source · intent-driven · beyond evolution</div>
@@ -312,7 +336,7 @@
       </div>
     </div>
 
-    <!-- Row 2: Values (3 cols) -->
+    <!-- Row 2: Values -->
     <div class="bento-row row-3">
       <div class="cell cell-value">
         <div class="cell-num">01</div>
@@ -331,7 +355,7 @@
       </div>
     </div>
 
-    <!-- Row 3: Roadmap (full width) -->
+    <!-- Row 3: Roadmap -->
     <div class="bento-row row-roadmap">
       <div class="cell cell-roadmap">
         <div class="cell-num">roadmap</div>
@@ -364,7 +388,7 @@
       </div>
     </div>
 
-    <!-- Row 4: Projects (2 cols) -->
+    <!-- Row 4: Projects -->
     <div class="bento-row row-projects">
       <a href="https://github.com/EvolveBeyond/EVOID" class="cell cell-project">
         <div>
@@ -399,13 +423,22 @@
       </a>
     </div>
 
-    <!-- Row 5: Code + About (2 cols) -->
-    <div class="bento-row row-code">
-      <div class="cell cell-code">
-        <div class="cell-num">example</div>
-        <div class="code-block">
-          <div class="code-header">api.py</div>
-          <div class="code-body">
+    <!-- Row 5: EVOID Spotlight (focused, not dominating) -->
+    <div class="bento-row row-spotlight">
+      <div class="cell cell-spotlight">
+        <div class="spotlight-text">
+          <div class="cell-num">spotlight</div>
+          <h3>EVOID</h3>
+          <p>The world's first Intent-Oriented Programming runtime. Not a framework — a runtime. Bring your own serializer, validator, adapter. We provide the pipeline.</p>
+          <p>57 pages of documentation. Pluggable engines for Pydantic, msgspec, or any library you prefer.</p>
+          <div class="spotlight-links">
+            <a href="https://evolvebeyond.github.io/EVOID/" class="spotlight-link">Documentation</a>
+            <a href="https://github.com/EvolveBeyond/EVOID" class="spotlight-link">Source</a>
+          </div>
+        </div>
+        <div class="spotlight-code">
+          <div class="spotlight-code-header">api.py</div>
+          <div class="spotlight-code-body">
 <span style="color:#666">from</span> evoid.native <span style="color:#666">import</span> create_service, on<br>
 <span style="color:#666">from</span> evoid <span style="color:#666">import</span> Intent, Level<br>
 <br>
@@ -422,12 +455,6 @@ GET_USER = Intent(<br>
 on(app, GET_USER, handle)
           </div>
         </div>
-      </div>
-      <div class="cell cell-about">
-        <div class="cell-num">about</div>
-        <h3>What is EVOID?</h3>
-        <p>The world's first Intent-Oriented Programming runtime. Not a framework — a runtime. Bring your own serializer, validator, adapter. We provide the pipeline.</p>
-        <p>57 pages of documentation. Pluggable engines for Pydantic, msgspec, or any library you prefer.</p>
       </div>
     </div>
 
