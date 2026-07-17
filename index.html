@@ -37,10 +37,11 @@
       transform: translate(-50%, -50%);
       width: 80vmin;
       height: 80vmin;
-      opacity: 0.08;
+      opacity: 0.1;
       pointer-events: none;
       z-index: 0;
       object-fit: contain;
+      filter: invert(1);
     }
 
     /* ── Nav ── */
@@ -423,38 +424,13 @@
       </a>
     </div>
 
-    <!-- Row 5: EVOID Spotlight (focused, not dominating) -->
-    <div class="bento-row row-spotlight">
-      <div class="cell cell-spotlight">
-        <div class="spotlight-text">
-          <div class="cell-num">spotlight</div>
-          <h3>EVOID</h3>
-          <p>The world's first Intent-Oriented Programming runtime. Not a framework — a runtime. Bring your own serializer, validator, adapter. We provide the pipeline.</p>
-          <p>57 pages of documentation. Pluggable engines for Pydantic, msgspec, or any library you prefer.</p>
-          <div class="spotlight-links">
-            <a href="https://evolvebeyond.github.io/EVOID/" class="spotlight-link">Documentation</a>
-            <a href="https://github.com/EvolveBeyond/EVOID" class="spotlight-link">Source</a>
-          </div>
-        </div>
-        <div class="spotlight-code">
-          <div class="spotlight-code-header">api.py</div>
-          <div class="spotlight-code-body">
-<span style="color:#666">from</span> evoid.native <span style="color:#666">import</span> create_service, on<br>
-<span style="color:#666">from</span> evoid <span style="color:#666">import</span> Intent, Level<br>
-<br>
-app = create_service(<span style="color:#888">"my-api"</span>)<br>
-<br>
-GET_USER = Intent(<br>
-&nbsp;&nbsp;name=<span style="color:#888">"GET:/users/{id}"</span>,<br>
-&nbsp;&nbsp;level=Level.STANDARD,<br>
-)<br>
-<br>
-<span style="color:#666">async def</span> handle(intent):<br>
-&nbsp;&nbsp;<span style="color:#666">return</span> {<span style="color:#888">"id"</span>: intent.metadata[<span style="color:#888">"path_params"</span>][<span style="color:#888">"id"</span>]}<br>
-<br>
-on(app, GET_USER, handle)
-          </div>
-        </div>
+    <!-- Row 5: CTA -->
+    <div class="bento-row row-roadmap">
+      <div class="cell cell-roadmap" style="text-align: center;">
+        <div class="cell-num">join us</div>
+        <h3 style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem;">Build the future with us.</h3>
+        <p style="font-size: 0.8rem; color: var(--fg-dim); font-weight: 300; margin-bottom: 1.5rem;">Every project we build is open source. Every contribution matters.</p>
+        <a href="https://github.com/EvolveBeyond" style="display: inline-block; padding: 0.5rem 1.25rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.75rem; color: var(--fg); text-decoration: none; transition: all 0.15s;">View on GitHub</a>
       </div>
     </div>
 
