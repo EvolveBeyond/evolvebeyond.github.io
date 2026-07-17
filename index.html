@@ -24,6 +24,11 @@
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
+      background-image: url('axolotl.png');
+      background-position: center;
+      background-size: 60vmin;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: var(--fg);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
@@ -31,18 +36,7 @@
     }
 
     /* ── Axolotl background ── */
-    .bg-axolotl {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80vmin;
-      height: 80vmin;
-      opacity: 0.1;
-      pointer-events: none;
-      z-index: 0;
-      object-fit: contain;
-      filter: invert(1);
-    }
+    /* Image is on body background, no separate element needed */
 
     /* ── Nav ── */
     .nav {
@@ -306,9 +300,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Axolotl background (img tag, not CSS background) -->
-  <img src="axolotl.png" alt="" class="bg-axolotl" aria-hidden="true">
 
   <!-- Nav -->
   <nav class="nav">
