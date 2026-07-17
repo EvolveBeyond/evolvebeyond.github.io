@@ -13,330 +13,287 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0c0c0e;
-      --fg: #e8e6e3;
-      --fg-muted: #7a7572;
-      --border: #1e1e20;
-      --surface: #131315;
-      --accent: #c4625a;
-      --accent-dim: rgba(196, 98, 90, 0.08);
-      --accent-glow: rgba(196, 98, 90, 0.15);
+      --bg: #0a0a0a;
+      --fg: #e0e0e0;
+      --fg-dim: #555;
+      --border: #1a1a1a;
+      --cell: #0f0f0f;
+      --cell-hover: #141414;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--fg);
-      line-height: 1.6;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
     /* ── Axolotl background ── */
-    .axolotl-bg {
+    .bg-axolotl {
       position: fixed;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 900px; height: 900px;
-      opacity: 0.03;
+      width: min(80vw, 700px);
+      height: min(80vw, 700px);
+      background: url('axolotl.png') center/contain no-repeat;
+      opacity: 0.06;
       pointer-events: none;
       z-index: 0;
+      filter: grayscale(1);
     }
-    .axolotl-bg svg { width: 100%; height: 100%; }
 
     /* ── Nav ── */
     .nav {
-      position: fixed; top: 0; left: 0; right: 0; height: 56px;
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
       border-bottom: 1px solid var(--border);
-      background: rgba(12, 12, 14, 0.8);
-      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(24px);
       z-index: 100;
     }
     .nav-inner {
-      max-width: 1100px; margin: 0 auto; height: 100%;
-      padding: 0 1.5rem;
+      max-width: 1200px; margin: 0 auto; height: 100%;
+      padding: 0 1rem;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
-      display: flex; align-items: center; gap: 0.6rem;
-      text-decoration: none; color: var(--fg);
-    }
-    .nav-logo-icon {
-      width: 28px; height: 28px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-logo-icon svg { width: 100%; height: 100%; }
-    .nav-logo-text {
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 500; font-size: 0.85rem;
+      font-weight: 500; font-size: 0.8rem;
+      color: var(--fg); text-decoration: none;
       letter-spacing: -0.02em;
     }
-    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links { display: flex; gap: 1.25rem; }
     .nav-links a {
-      color: var(--fg-muted); text-decoration: none;
-      font-size: 0.8rem; transition: color 0.15s;
+      color: var(--fg-dim); text-decoration: none;
+      font-size: 0.75rem; transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--fg); }
 
-    /* ── Main container ── */
-    .main {
+    /* ── Bento ── */
+    .bento {
       position: relative; z-index: 1;
-      max-width: 1100px; margin: 0 auto;
-      padding: 0 1.5rem;
+      max-width: 1200px; margin: 0 auto;
+      padding: 48px 1px 0;
+      display: flex; flex-direction: column;
+      gap: 1px;
+      background: var(--border);
     }
 
-    /* ── Hero ── */
-    .hero {
-      padding: 10rem 0 6rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.3rem 0.8rem; border-radius: 999px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(196, 98, 90, 0.12);
-      font-size: 0.7rem; color: var(--accent);
-      font-weight: 500; letter-spacing: 0.05em;
-      margin-bottom: 2rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .hero-badge-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent); animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300; letter-spacing: -0.04em;
-      line-height: 1.1; margin-bottom: 2rem;
-      max-width: 700px;
-    }
-    .hero h1 strong { font-weight: 700; color: var(--accent); }
-    .hero-desc {
-      font-size: 1.05rem; color: var(--fg-muted);
-      max-width: 520px; line-height: 1.8;
-      font-weight: 300;
-    }
-
-    /* ── Roadmap ── */
-    .roadmap {
-      padding: 5rem 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .roadmap-line {
-      position: absolute;
-      left: 24px; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--accent-dim), var(--border), var(--accent-dim), transparent);
-    }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--fg-muted);
-      margin-bottom: 3rem;
-      padding-left: 3rem;
-    }
-
-    /* ── Milestone ── */
-    .milestone {
+    .bento-row {
       display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 0;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-    .milestone:last-child { margin-bottom: 0; }
-    .milestone-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background: var(--bg);
-      margin-top: 4px;
-      position: relative;
-      z-index: 1;
-    }
-    .milestone-dot--filled { background: var(--accent); }
-    .milestone-content { padding-left: 1rem; }
-    .milestone-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-    .milestone h3 {
-      font-size: 1.1rem; font-weight: 500;
-      letter-spacing: -0.01em; margin-bottom: 0.5rem;
-    }
-    .milestone p {
-      font-size: 0.85rem; color: var(--fg-muted);
-      line-height: 1.7; font-weight: 300;
-      max-width: 600px;
+      gap: 1px;
+      background: var(--border);
     }
 
-    /* ── Values ── */
-    .values {
-      padding: 5rem 0;
-      border-bottom: 1px solid var(--border);
+    .cell {
+      background: var(--cell);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: background 0.2s;
     }
-    .values-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    .value { padding: 1.5rem 0; }
-    .value-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-    .value h3 {
-      font-size: 0.95rem; font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    .value p {
-      font-size: 0.8rem; color: var(--fg-muted);
-      line-height: 1.7; font-weight: 300;
-    }
+    .cell:hover { background: var(--cell-hover); }
 
-    /* ── Projects ── */
-    .projects {
-      padding: 5rem 0;
-      border-bottom: 1px solid var(--border);
+    /* ── Hero cell ── */
+    .cell-hero {
+      grid-column: 1 / -1;
+      padding: 6rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .project-list { display: flex; flex-direction: column; }
-    .project {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none; color: var(--fg);
-      transition: opacity 0.15s;
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--fg-dim);
+      margin-bottom: 2rem;
     }
-    .project:last-child { border-bottom: none; }
-    .project:hover { opacity: 0.6; }
-    .project-left { display: flex; align-items: center; gap: 1rem; }
-    .project-icon {
-      width: 32px; height: 32px;
-      border-radius: 6px;
-      background: var(--accent-dim);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem;
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 650px;
     }
-    .project-name { font-size: 0.9rem; font-weight: 500; }
-    .project-desc {
-      font-size: 0.75rem; color: var(--fg-muted);
+    .hero h1 strong { font-weight: 700; }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--fg-dim);
+      max-width: 480px;
+      line-height: 1.8;
       font-weight: 300;
     }
-    .project-arrow {
-      color: var(--fg-muted); font-size: 0.8rem;
-      transition: color 0.15s;
-    }
-    .project:hover .project-arrow { color: var(--fg); }
 
-    /* ── CTA ── */
-    .cta {
-      padding: 6rem 0;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .cta h2 {
-      font-size: 1.8rem; font-weight: 300;
-      letter-spacing: -0.03em;
+    /* ── Values row (3 cols) ── */
+    .row-3 { grid-template-columns: repeat(3, 1fr); }
+    .cell-value { padding: 2rem; }
+    .cell-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--fg-dim);
       margin-bottom: 1rem;
     }
-    .cta h2 strong { font-weight: 600; color: var(--accent); }
-    .cta p {
-      font-size: 0.9rem; color: var(--fg-muted);
-      margin-bottom: 2rem; font-weight: 300;
+    .cell-value h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
     }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.7rem 1.5rem; border-radius: 8px;
-      background: var(--accent); color: #0c0c0e;
-      text-decoration: none; font-size: 0.85rem;
-      font-weight: 600; transition: all 0.2s;
+    .cell-value p {
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      line-height: 1.7;
+      font-weight: 300;
     }
-    .cta-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
-    /* ── Footer ── */
-    .footer {
-      padding: 2.5rem 0;
-      display: flex; justify-content: space-between;
-      align-items: center;
-      font-size: 0.7rem; color: var(--fg-muted);
+    /* ── Roadmap row ── */
+    .row-roadmap { grid-template-columns: 1fr; }
+    .cell-roadmap { padding: 3rem; }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
     }
-    .footer-links { display: flex; gap: 1.5rem; }
+    .roadmap-item {}
+    .roadmap-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--fg-dim);
+      margin-bottom: 0.5rem;
+    }
+    .roadmap-item h4 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+    .roadmap-item p {
+      font-size: 0.7rem;
+      color: var(--fg-dim);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .roadmap-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--fg-dim);
+      margin-bottom: 0.75rem;
+    }
+    .roadmap-dot--active { background: var(--fg); }
+
+    /* ── Projects row ── */
+    .row-projects { grid-template-columns: 1fr 1fr; }
+    .cell-project {
+      padding: 2rem;
+      text-decoration: none;
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project-name {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+    .project-desc {
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .project-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--fg-dim);
+      margin-top: 1rem;
+    }
+
+    /* ── Code row ── */
+    .row-code { grid-template-columns: 1fr 1fr; }
+    .cell-code { padding: 2rem; }
+    .code-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .code-header {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--fg-dim);
+    }
+    .code-body {
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      color: #999;
+      overflow-x: auto;
+    }
+    .cell-about h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .cell-about p {
+      font-size: 0.8rem;
+      color: var(--fg-dim);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Footer row ── */
+    .row-footer { grid-template-columns: 1fr; }
+    .cell-footer {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--fg-dim);
+    }
+    .footer-links { display: flex; gap: 1.25rem; }
     .footer-links a {
-      color: var(--fg-muted); text-decoration: none;
+      color: var(--fg-dim);
+      text-decoration: none;
       transition: color 0.15s;
     }
     .footer-links a:hover { color: var(--fg); }
 
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .hero { padding: 7rem 0 4rem; }
-      .hero h1 { font-size: 2rem; }
-      .values-grid { grid-template-columns: 1fr; }
-      .milestone { grid-template-columns: 32px 1fr; }
-      .roadmap-line { left: 16px; }
-      .section-label { padding-left: 2rem; }
+      .row-3 { grid-template-columns: 1fr; }
+      .row-projects { grid-template-columns: 1fr; }
+      .row-code { grid-template-columns: 1fr; }
+      .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
+      .cell-hero { padding: 4rem 1.5rem; }
       .nav-links { display: none; }
-      .footer { flex-direction: column; gap: 1rem; }
+      .cell-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <!-- Axolotl background -->
-  <div class="axolotl-bg">
-    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Axolotl silhouette -->
-      <ellipse cx="200" cy="180" rx="80" ry="50" fill="currentColor"/>
-      <ellipse cx="200" cy="260" rx="60" ry="80" fill="currentColor"/>
-      <!-- Head -->
-      <ellipse cx="200" cy="140" rx="70" ry="55" fill="currentColor"/>
-      <!-- Eyes -->
-      <circle cx="170" cy="125" r="12" fill="var(--bg)"/>
-      <circle cx="230" cy="125" r="12" fill="var(--bg)"/>
-      <circle cx="170" cy="125" r="5" fill="currentColor"/>
-      <circle cx="230" cy="125" r="5" fill="currentColor"/>
-      <!-- Gills (left) -->
-      <path d="M130 120 Q100 90 80 100" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <path d="M125 135 Q90 115 70 130" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M120 150 Q85 140 65 155" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <!-- Gills (right) -->
-      <path d="M270 120 Q300 90 320 100" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <path d="M275 135 Q310 115 330 130" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M280 150 Q315 140 335 155" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <!-- Tail -->
-      <path d="M200 340 Q180 370 160 360 Q140 350 150 330" stroke="currentColor" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <!-- Front legs -->
-      <path d="M150 200 Q120 220 110 250" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <path d="M250 200 Q280 220 290 250" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <!-- Toes -->
-      <circle cx="105" cy="255" r="4" fill="currentColor"/>
-      <circle cx="115" cy="260" r="4" fill="currentColor"/>
-      <circle cx="285" cy="255" r="4" fill="currentColor"/>
-      <circle cx="295" cy="260" r="4" fill="currentColor"/>
-    </svg>
-  </div>
+  <div class="bg-axolotl"></div>
 
   <!-- Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <div class="nav-logo-icon">
-          <svg viewBox="0 0 32 32" fill="none">
-            <ellipse cx="16" cy="13" rx="7" ry="5" fill="var(--accent)"/>
-            <circle cx="13" cy="12" r="1.5" fill="var(--bg)"/>
-            <circle cx="19" cy="12" r="1.5" fill="var(--bg)"/>
-            <path d="M9 12 Q5 8 4 10" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M23 12 Q27 8 28 10" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <ellipse cx="16" cy="20" rx="5" ry="7" fill="var(--accent)"/>
-          </svg>
-        </div>
-        <span class="nav-logo-text">evolvebeyond</span>
-      </a>
+      <a href="/" class="nav-logo">evolvebeyond</a>
       <div class="nav-links">
+        <a href="#values">Values</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#projects">Projects</a>
         <a href="https://github.com/EvolveBeyond">GitHub</a>
@@ -344,151 +301,152 @@
     </div>
   </nav>
 
-  <main class="main">
+  <!-- Bento Grid -->
+  <div class="bento">
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        open source
+    <!-- Row 1: Hero (full width) -->
+    <div class="bento-row">
+      <div class="cell cell-hero">
+        <div class="hero-label">open source · intent-driven · beyond evolution</div>
+        <h1>We build tools that <strong>evolve beyond</strong> what's possible.</h1>
+        <p class="hero-desc">
+          Our team selects projects where real change happens. Not incremental improvements — paradigm shifts. Each tool we build pushes open source further.
+        </p>
       </div>
-      <h1>We build tools that <strong>evolve beyond</strong> what's possible.</h1>
-      <p class="hero-desc">
-        Our team selects projects where real change happens — not incremental improvements, but paradigm shifts. Each tool we build pushes open source further than it's been before.
-      </p>
-    </section>
+    </div>
 
-    <!-- Roadmap -->
-    <section class="roadmap" id="roadmap">
-      <div class="roadmap-line"></div>
-      <div class="section-label">Our Roadmap</div>
-
-      <div class="milestone">
-        <div class="milestone-dot milestone-dot--filled"></div>
-        <div class="milestone-content">
-          <div class="milestone-label">2024 — Founded</div>
-          <h3>Starting with intent</h3>
-          <p>We began with a simple question: what if your data model could carry its own infrastructure policy? That question became EVOID — the world's first Intent-Oriented Programming runtime.</p>
-        </div>
+    <!-- Row 2: Values (3 cols) -->
+    <div class="bento-row row-3">
+      <div class="cell cell-value">
+        <div class="cell-num">01</div>
+        <h3>Paradigm shifts</h3>
+        <p>We don't fix symptoms. We rethink the problem. If a tool can be improved by 10%, we ask if it should be replaced entirely.</p>
       </div>
-
-      <div class="milestone">
-        <div class="milestone-dot milestone-dot--filled"></div>
-        <div class="milestone-content">
-          <div class="milestone-label">2025 — Expanding</div>
-          <h3>Beyond programming</h3>
-          <p>Intent-orientation isn't just for code. We're applying the same principle to networking, infrastructure, and developer tools. Every project we touch gets the same treatment: declare intent, let the system handle the rest.</p>
-        </div>
+      <div class="cell cell-value">
+        <div class="cell-num">02</div>
+        <h3>Intent over mechanics</h3>
+        <p>Declare what you want. Let the system figure out how. We build tools that focus on intent, not the plumbing underneath.</p>
       </div>
-
-      <div class="milestone">
-        <div class="milestone-dot milestone-dot--filled"></div>
-        <div class="milestone-content">
-          <div class="milestone-label">2026 — Now</div>
-          <h3>Building the ecosystem</h3>
-          <p>EVOID is maturing. XRayMOD is redefining proxy management. We're creating an ecosystem where intent-driven tools work together — where your infrastructure adapts to your needs, not the other way around.</p>
-        </div>
+      <div class="cell cell-value">
+        <div class="cell-num">03</div>
+        <h3>Open by default</h3>
+        <p>Everything we build is open. Transparent development, community-driven, no vendor lock-in.</p>
       </div>
+    </div>
 
-      <div class="milestone">
-        <div class="milestone-dot"></div>
-        <div class="milestone-content">
-          <div class="milestone-label">Future</div>
-          <h3>Intent-Driven Everything</h3>
-          <p>Our vision: a world where developers declare what they want, and systems figure out how. From programming to networking to infrastructure — intent becomes the universal interface.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Values -->
-    <section class="values">
-      <div class="section-label">How We Think</div>
-      <div class="values-grid">
-        <div class="value">
-          <div class="value-num">01</div>
-          <h3>Paradigm shifts over patches</h3>
-          <p>We don't fix symptoms. We rethink the problem. If a tool can be improved by 10%, we ask if it should be replaced entirely.</p>
-        </div>
-        <div class="value">
-          <div class="value-num">02</div>
-          <h3>Open source as default</h3>
-          <p>Everything we build is open. Transparent development, community-driven, no vendor lock-in. The best tools are the ones everyone can use.</p>
-        </div>
-        <div class="value">
-          <div class="value-num">03</div>
-          <h3>Intent over mechanics</h3>
-          <p>Declare what you want. Let the system figure out how. We build tools that focus on intent, not the plumbing underneath.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="projects" id="projects">
-      <div class="section-label">Projects</div>
-      <div class="project-list">
-        <a href="https://github.com/EvolveBeyond/EVOID" class="project">
-          <div class="project-left">
-            <div class="project-icon">🧠</div>
-            <div>
-              <div class="project-name">EVOID</div>
-              <div class="project-desc">Intent-Oriented Programming Runtime</div>
-            </div>
+    <!-- Row 3: Roadmap (full width) -->
+    <div class="bento-row row-roadmap">
+      <div class="cell cell-roadmap">
+        <div class="cell-num">roadmap</div>
+        <div class="roadmap-grid">
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2024</div>
+            <h4>Founded</h4>
+            <p>Started with a question: what if your data model could carry its own infrastructure policy?</p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
-        <a href="https://github.com/EvolveBeyond/XRayMOD" class="project">
-          <div class="project-left">
-            <div class="project-icon">🛡️</div>
-            <div>
-              <div class="project-name">XRayMOD</div>
-              <div class="project-desc">Modular proxy management panel</div>
-            </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2025</div>
+            <h4>Expanding</h4>
+            <p>Applied intent-orientation to networking, infrastructure, and developer tools.</p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
-        <a href="https://github.com/EvolveBeyond/NvPak" class="project">
-          <div class="project-left">
-            <div class="project-icon">✨</div>
-            <div>
-              <div class="project-name">NvPak</div>
-              <div class="project-desc">Zen-modernized Neovim configuration</div>
-            </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2026</div>
+            <h4>Building ecosystem</h4>
+            <p>EVOID maturing. XRayMOD redefining proxy management. Creating an intent-driven ecosystem.</p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
-        <a href="https://github.com/EvolveBeyond/EasyMQL" class="project">
-          <div class="project-left">
-            <div class="project-icon">📊</div>
-            <div>
-              <div class="project-name">EasyMQL</div>
-              <div class="project-desc">MetaTrader 5 indicator library</div>
-            </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-year">Future</div>
+            <h4>Intent-Driven Everything</h4>
+            <p>A world where developers declare what they want, and systems figure out how.</p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- CTA -->
-    <section class="cta">
-      <h2>Ready to <strong>evolve</strong>?</h2>
-      <p>Join us in building the future of open source.</p>
-      <a href="https://github.com/EvolveBeyond" class="cta-btn">
-        View on GitHub
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <!-- Row 4: Projects (2 cols) -->
+    <div class="bento-row row-projects">
+      <a href="https://github.com/EvolveBeyond/EVOID" class="cell cell-project">
+        <div>
+          <div class="project-name">EVOID</div>
+          <div class="project-desc">Intent-Oriented Programming Runtime. Your data model IS your infrastructure policy.</div>
+          <div class="project-meta">Python · v0.3.3</div>
+        </div>
       </a>
-    </section>
+      <a href="https://github.com/EvolveBeyond/XRayMOD" class="cell cell-project">
+        <div>
+          <div class="project-name">XRayMOD</div>
+          <div class="project-desc">Modular proxy management. Connecting Cloudflare to personal servers with minimal config.</div>
+          <div class="project-meta">TypeScript · React</div>
+        </div>
+      </a>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <span>© 2026 EvolveBeyond</span>
-      <div class="footer-links">
-        <a href="https://github.com/EvolveBeyond">GitHub</a>
-        <a href="https://evolvebeyond.github.io/EVOID/">EVOID Docs</a>
-        <a href="mailto:pakrohk@gamil.com">Contact</a>
+    <div class="bento-row row-projects">
+      <a href="https://github.com/EvolveBeyond/NvPak" class="cell cell-project">
+        <div>
+          <div class="project-name">NvPak</div>
+          <div class="project-desc">Zen-modernized Neovim configuration. Fork it, configure only what you need.</div>
+          <div class="project-meta">Lua · 104 ★</div>
+        </div>
+      </a>
+      <a href="https://github.com/EvolveBeyond/EasyMQL" class="cell cell-project">
+        <div>
+          <div class="project-name">EasyMQL</div>
+          <div class="project-desc">MetaTrader 5 indicator and expert advisor library.</div>
+          <div class="project-meta">MQL5</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Row 5: Code + About (2 cols) -->
+    <div class="bento-row row-code">
+      <div class="cell cell-code">
+        <div class="cell-num">example</div>
+        <div class="code-block">
+          <div class="code-header">api.py</div>
+          <div class="code-body">
+<span style="color:#666">from</span> evoid.native <span style="color:#666">import</span> create_service, on<br>
+<span style="color:#666">from</span> evoid <span style="color:#666">import</span> Intent, Level<br>
+<br>
+app = create_service(<span style="color:#888">"my-api"</span>)<br>
+<br>
+GET_USER = Intent(<br>
+&nbsp;&nbsp;name=<span style="color:#888">"GET:/users/{id}"</span>,<br>
+&nbsp;&nbsp;level=Level.STANDARD,<br>
+)<br>
+<br>
+<span style="color:#666">async def</span> handle(intent):<br>
+&nbsp;&nbsp;<span style="color:#666">return</span> {<span style="color:#888">"id"</span>: intent.metadata[<span style="color:#888">"path_params"</span>][<span style="color:#888">"id"</span>]}<br>
+<br>
+on(app, GET_USER, handle)
+          </div>
+        </div>
       </div>
-    </footer>
+      <div class="cell cell-about">
+        <div class="cell-num">about</div>
+        <h3>What is EVOID?</h3>
+        <p>The world's first Intent-Oriented Programming runtime. Not a framework — a runtime. Bring your own serializer, validator, adapter. We provide the pipeline.</p>
+        <p>57 pages of documentation. Pluggable engines for Pydantic, msgspec, or any library you prefer.</p>
+      </div>
+    </div>
 
-  </main>
+    <!-- Row 6: Footer -->
+    <div class="bento-row row-footer">
+      <div class="cell cell-footer">
+        <span>© 2026 EvolveBeyond</span>
+        <div class="footer-links">
+          <a href="https://github.com/EvolveBeyond">GitHub</a>
+          <a href="https://evolvebeyond.github.io/EVOID/">EVOID Docs</a>
+          <a href="mailto:pakrohk@gamil.com">Contact</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </body>
 </html>
