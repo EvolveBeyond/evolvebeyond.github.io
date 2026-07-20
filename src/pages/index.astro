@@ -1,309 +1,274 @@
 ---
-import '../styles/main.css';
+// EvolveBeyond Landing Page
 ---
 
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EvolveBeyond — Building the Future of Software</title>
-  <meta name="description" content="EvolveBeyond - Open source projects, IOP runtime, and the future of software development">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+  <title>EvolveBeyond — Beyond Evolution</title>
+  <meta name="description" content="EvolveBeyond — Open source projects that evolve beyond the ordinary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦎</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    @theme {
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-      --color-brand-purple: oklch(0.55 0.22 300);
-      --color-brand-purple-glow: oklch(0.65 0.25 302);
-      --color-brand-emerald: oklch(0.72 0.19 165);
-    }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg: oklch(0.98 0.005 260);
-      --bg-deep: oklch(0.96 0.008 260);
-      --text: oklch(0.18 0.02 260);
-      --text-muted: oklch(0.5 0.02 260);
-      --purple: oklch(0.55 0.22 300);
-      --purple-glow: oklch(0.65 0.25 302);
-      --emerald: oklch(0.72 0.19 165);
-      --border: oklch(0.88 0.01 260);
-      --glass: oklch(1 0 0 / 0.6);
-      --glass-border: oklch(1 0 0 / 0.15);
-    }
-
-    [data-theme="dark"] {
-      --bg: oklch(0.13 0.015 260);
-      --bg-deep: oklch(0.10 0.02 260);
-      --text: oklch(0.95 0.005 260);
-      --text-muted: oklch(0.6 0.02 260);
-      --border: oklch(0.25 0.02 260);
-      --glass: oklch(0.18 0.015 260 / 0.7);
-      --glass-border: oklch(1 0 0 / 0.08);
-    }
-
-    body {
-      font-family: var(--font-sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-glow) 50%, var(--emerald) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .terminal-dot--red { background: #ff5f57; }
-    .terminal-dot--yellow { background: #febc2e; }
-    .terminal-dot--green { background: #28c840; }
-
-    .code-keyword { color: oklch(0.7 0.18 300); }
-    .code-string { color: oklch(0.75 0.18 145); }
-    .code-comment { color: oklch(0.5 0.02 260); font-style: italic; }
-    .code-func { color: oklch(0.8 0.15 250); }
-    .code-class { color: oklch(0.75 0.2 30); }
-
-    .icon-sun { display: none; }
-    [data-theme="light"] .icon-sun { display: block; }
-    [data-theme="light"] .icon-moon { display: none; }
-
-    @media (max-width: 768px) {
-      .bento-code { grid-template-columns: 1fr !important; }
-      .bento-projects { grid-template-columns: 1fr !important; }
-      .bento-links { grid-template-columns: repeat(2, 1fr) !important; }
-      .link-cell { border-right: none !important; border-bottom: 1px solid oklch(from var(--border) l c h / 0.15) !important; }
-      .arch-flow { flex-direction: column !important; }
-      .arch-arrow { transform: rotate(90deg); }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+  <img src="/axolotl.png" alt="" class="bg-axolotl" aria-hidden="true">
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 h-15 z-50 border-b border-[var(--glass-border)]"
-       style="background: var(--glass); backdrop-filter: blur(16px) saturate(1.3);">
-    <div class="max-w-[1200px] mx-auto h-full px-6 flex items-center justify-between">
-      <div class="flex items-center gap-8">
-        <a href="/" class="font-mono font-bold text-xl text-[var(--purple)] no-underline"
-           style="text-shadow: 0 0 16px oklch(from var(--purple) l c h / 0.3);">evolve</a>
-        <div class="flex gap-6 max-md:hidden">
-          <a href="https://evolvebeyond.github.io/EVOID/" class="text-[var(--text-muted)] no-underline text-sm font-medium hover:text-[var(--purple)] transition-colors">Docs</a>
-          <a href="https://github.com/EvolveBeyond" class="text-[var(--text-muted)] no-underline text-sm font-medium hover:text-[var(--purple)] transition-colors">GitHub</a>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/EvolveBeyond" class="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors flex" aria-label="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-        <button id="theme-toggle" class="w-8 h-8 rounded-lg border border-[var(--glass-border)] bg-transparent text-[var(--text-muted)] cursor-pointer flex items-center justify-center hover:border-[var(--purple)] hover:text-[var(--purple)] transition-all" aria-label="Toggle theme">
-          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">evolvebeyond</a>
+      <div class="nav-links">
+        <a href="#values">Values</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/EvolveBeyond">GitHub</a>
       </div>
     </div>
   </nav>
 
-  <!-- Bento Grid -->
-  <div class="w-full min-h-dvh mt-[60px] flex flex-col">
-
-    <!-- Row 1: Hero -->
-    <div class="grid gap-px flex-1" style="grid-template-columns: 1fr; background: oklch(from var(--border) l c h / 0.15);">
-      <div class="bg-[var(--bg)] flex flex-col items-center justify-center text-center px-8 py-16 relative overflow-hidden"
-           style="background: radial-gradient(ellipse at 20% 80%, oklch(from var(--purple) l c h / 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, oklch(from var(--emerald) l c h / 0.06) 0%, transparent 50%), var(--bg);">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider mb-6"
-             style="background: oklch(from var(--purple) l c h / 0.08); border: 1px solid oklch(from var(--purple) l c h / 0.15); color: var(--purple);">
-          <span class="w-1.5 h-1.5 rounded-full bg-[var(--emerald)]" style="animation: pulse 2s infinite;"></span>
-          Open Source · IOP Runtime · v0.3.3
-        </div>
-        <h1 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight leading-none mb-6">
-          <span class="gradient-text">EvolveBeyond</span>
-        </h1>
-        <p class="text-[1.15rem] text-[var(--text-muted)] max-w-[550px] mx-auto mb-10 leading-relaxed">
-          We build tools that evolve how developers write software.
-          Intent-driven, async-native, and designed for the future.
-        </p>
-        <div class="flex gap-3 flex-wrap justify-center">
-          <a href="https://evolvebeyond.github.io/EVOID/" class="px-6 py-2.5 rounded-xl text-sm font-semibold no-underline inline-flex items-center gap-2 text-white transition-all hover:-translate-y-0.5"
-             style="background: var(--purple); box-shadow: 0 0 20px oklch(from var(--purple) l c h / 0.3);"
-             onmouseover="this.style.boxShadow='0 0 30px oklch(from var(--purple) l c h / 0.5)'"
-             onmouseout="this.style.boxShadow='0 0 20px oklch(from var(--purple) l c h / 0.3)'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            Read the Docs
-          </a>
-          <a href="https://github.com/EvolveBeyond"
-             class="px-6 py-2.5 rounded-xl text-sm font-semibold no-underline text-[var(--text)] border border-[var(--border)] backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-[var(--purple)] hover:text-[var(--purple)]"
-             style="background: var(--glass);">
-            GitHub
-          </a>
-        </div>
+  <div class="bento">
+    <div class="bento-row">
+      <div class="cell cell-hero">
+        <div class="hero-label">open source · intent-driven · beyond evolution</div>
+        <h1>We build tools that <strong>evolve beyond</strong> what's possible.</h1>
+        <p class="hero-desc">Our team selects projects where real change happens. Not incremental improvements — paradigm shifts. Each tool we build pushes open source further.</p>
       </div>
     </div>
 
-    <!-- Divider -->
-    <div class="relative h-px bg-[var(--border)]">
-      <span class="absolute right-0 top-1/2 w-2 h-2 rounded-full bg-[var(--purple)] -translate-y-1/2"
-            style="box-shadow: 0 0 8px oklch(from var(--purple) l c h / 0.4);"></span>
+    <div class="bento-row row-3">
+      <div class="cell cell-value">
+        <div class="cell-num">01</div>
+        <h3>Paradigm shifts</h3>
+        <p>We don't fix symptoms. We rethink the problem. If a tool can be improved by 10%, we ask if it should be replaced entirely.</p>
+      </div>
+      <div class="cell cell-value">
+        <div class="cell-num">02</div>
+        <h3>Intent over mechanics</h3>
+        <p>Declare what you want. Let the system figure out how. We build tools that focus on intent, not the plumbing underneath.</p>
+      </div>
+      <div class="cell cell-value">
+        <div class="cell-num">03</div>
+        <h3>Open by default</h3>
+        <p>Everything we build is open. Transparent development, community-driven, no vendor lock-in.</p>
+      </div>
     </div>
 
-    <!-- Row 2: Code + About -->
-    <div class="bento-code grid gap-px flex-1 min-h-0" style="grid-template-columns: 1.2fr 1fr; background: oklch(from var(--border) l c h / 0.15);">
-      <div class="bg-[var(--bg-deep)] p-8 flex flex-col justify-center relative overflow-hidden"
-           style="background: radial-gradient(ellipse at 30% 70%, oklch(from var(--purple) l c h / 0.05) 0%, transparent 50%), var(--bg-deep);">
-        <div class="bg-[oklch(0.12_0.02_260)] rounded-xl border border-[oklch(0.25_0.02_260)] overflow-hidden shadow-[0_8px_32px_oklch(0_0_0_/_0.2)]">
-          <div class="flex items-center gap-2 px-4 py-3 border-b border-[oklch(0.25_0.02_260)]">
-            <span class="w-2.5 h-2.5 rounded-full terminal-dot--red"></span>
-            <span class="w-2.5 h-2.5 rounded-full terminal-dot--yellow"></span>
-            <span class="w-2.5 h-2.5 rounded-full terminal-dot--green"></span>
-            <span class="ml-2 font-mono text-xs text-[var(--text-muted)]">api.py</span>
+    <div class="bento-row row-roadmap">
+      <div class="cell cell-roadmap">
+        <div class="cell-num">roadmap</div>
+        <div class="roadmap-grid">
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2024</div>
+            <h4>Founded</h4>
+            <p>Started with a question: what if your data model could carry its own infrastructure policy?</p>
           </div>
-          <div class="p-5 font-mono text-sm leading-loose text-[oklch(0.85_0.02_260)] min-h-[200px]">
-            <span class="code-keyword">from</span> evoid.native <span class="code-keyword">import</span> create_service, on<br>
-            <span class="code-keyword">from</span> evoid <span class="code-keyword">import</span> Intent, Level<br><br>
-            app = <span class="code-func">create_service</span>(<span class="code-string">"my-api"</span>)<br><br>
-            GET_USER = <span class="code-class">Intent</span>(<br>
-            &nbsp;&nbsp;name=<span class="code-string">"GET:/users/&#123;id&#125;"</span>,<br>
-            &nbsp;&nbsp;level=Level.<span class="code-class">STANDARD</span>,<br>
-            &nbsp;&nbsp;metadata=&#123;<span class="code-string">"processors"</span>: (<span class="code-string">"validate"</span>,)&#125;,<br>
-            )<br><br>
-            <span class="code-keyword">async def</span> <span class="code-func">handle</span>(intent):<br>
-            &nbsp;&nbsp;<span class="code-keyword">return</span> &#123;<span class="code-string">"id"</span>: intent.metadata[<span class="code-string">"path_params"</span>][<span class="code-string">"id"</span>]&#125;<br><br>
-            <span class="code-func">on</span>(app, GET_USER, handle)
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2025</div>
+            <h4>Expanding</h4>
+            <p>Applied intent-orientation to networking, infrastructure, and developer tools.</p>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--active"></div>
+            <div class="roadmap-year">2026</div>
+            <h4>Building ecosystem</h4>
+            <p>EVOID maturing. XRayMOD redefining proxy management. Creating an intent-driven ecosystem.</p>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot"></div>
+            <div class="roadmap-year">Future</div>
+            <h4>Intent-Driven Everything</h4>
+            <p>A world where developers declare what they want, and systems figure out how.</p>
           </div>
         </div>
       </div>
-      <div class="bg-[var(--bg)] p-8 flex flex-col justify-center">
-        <h2 class="text-2xl font-bold mb-4 tracking-tight">What is EVOID?</h2>
-        <p class="text-sm text-[var(--text-muted)] mb-3 leading-relaxed">
-          EVOID is the reference runtime for Intent-Oriented Programming.
-          Your data declares what it needs. The runtime handles how.
-        </p>
-        <p class="text-sm text-[var(--text-muted)] mb-3 leading-relaxed">
-          Not a framework. A runtime. Bring your own serializer, validator,
-          and adapter. We provide the pipeline.
-        </p>
-        <p class="mt-4">
-          <strong class="text-[var(--purple)]">57 pages</strong> of documentation.
-          <strong class="text-[var(--emerald)]">Pluggable engines</strong> for any library.
-        </p>
-      </div>
     </div>
 
-    <!-- Divider -->
-    <div class="relative h-px bg-[var(--border)]">
-      <span class="absolute right-0 top-1/2 w-2 h-2 rounded-full bg-[var(--purple)] -translate-y-1/2"
-            style="box-shadow: 0 0 8px oklch(from var(--purple) l c h / 0.4);"></span>
-    </div>
-
-    <!-- Row 3: Projects -->
-    <div class="bento-projects grid gap-px flex-none" style="grid-template-columns: repeat(3, 1fr); background: oklch(from var(--border) l c h / 0.15);">
-      <a href="https://evolvebeyond.github.io/EVOID/" class="bg-[var(--bg)] p-6 flex flex-col no-underline text-inherit transition-all hover:bg-[oklch(from var(--purple) l c h /_0.03)]">
-        <div class="w-10 h-10 rounded-[10px] flex items-center justify-center text-xl mb-4"
-             style="background: oklch(from var(--purple) l c h / 0.1);">🧠</div>
-        <div class="text-base font-bold mb-2">EVOID</div>
-        <div class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">Intent-Oriented Programming Runtime. Your data model IS your infrastructure policy.</div>
-        <div class="flex gap-1.5 mt-4 flex-wrap">
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">Python</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">IOP</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">v0.3.3</span>
+    <div class="bento-row row-projects">
+      <a href="https://github.com/EvolveBeyond/EVOID" class="cell cell-project">
+        <div>
+          <div class="project-name">EVOID</div>
+          <div class="project-desc">Intent-Oriented Programming Runtime</div>
+          <div class="project-meta">Python · v0.3.3</div>
         </div>
       </a>
-      <a href="https://github.com/EvolveBeyond/XRayMOD" class="bg-[var(--bg)] p-6 flex flex-col no-underline text-inherit transition-all hover:bg-[oklch(from var(--purple) l c h /_0.03)]">
-        <div class="w-10 h-10 rounded-[10px] flex items-center justify-center text-xl mb-4"
-             style="background: oklch(from var(--emerald) l c h / 0.1);">🛡️</div>
-        <div class="text-base font-bold mb-2">XRayMOD</div>
-        <div class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">Modular proxy management panel built on Cloudflare Workers.</div>
-        <div class="flex gap-1.5 mt-4 flex-wrap">
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">React</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">TypeScript</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">Edge</span>
-        </div>
-      </a>
-      <a href="https://github.com/EvolveBeyond/NvPak" class="bg-[var(--bg)] p-6 flex flex-col no-underline text-inherit transition-all hover:bg-[oklch(from var(--purple) l c h /_0.03)]">
-        <div class="w-10 h-10 rounded-[10px] flex items-center justify-center text-xl mb-4"
-             style="background: oklch(0.6 0.15 250 / 0.1);">✨</div>
-        <div class="text-base font-bold mb-2">NvPak</div>
-        <div class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">Zen-modernized Neovim configuration. Fork it, configure only what you need.</div>
-        <div class="flex gap-1.5 mt-4 flex-wrap">
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">Lua</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">Neovim</span>
-          <span class="px-2 py-0.5 rounded-full text-[0.7rem] text-[var(--text-muted)] font-medium" style="background: oklch(from var(--border) l c h / 0.5);">104 ★</span>
+      <a href="https://github.com/EvolveBeyond/XRayMOD" class="cell cell-project">
+        <div>
+          <div class="project-name">XRayMOD</div>
+          <div class="project-desc">Modular proxy management panel</div>
+          <div class="project-meta">TypeScript · React</div>
         </div>
       </a>
     </div>
 
-    <!-- Divider -->
-    <div class="relative h-px bg-[var(--border)]">
-      <span class="absolute right-0 top-1/2 w-2 h-2 rounded-full bg-[var(--purple)] -translate-y-1/2"
-            style="box-shadow: 0 0 8px oklch(from var(--purple) l c h / 0.4);"></span>
+    <div class="bento-row row-projects">
+      <a href="https://github.com/EvolveBeyond/NvPak" class="cell cell-project">
+        <div>
+          <div class="project-name">NvPak</div>
+          <div class="project-desc">Zen-modernized Neovim configuration</div>
+          <div class="project-meta">Lua · 104 ★</div>
+        </div>
+      </a>
+      <a href="https://github.com/EvolveBeyond/EasyMQL" class="cell cell-project">
+        <div>
+          <div class="project-name">EasyMQL</div>
+          <div class="project-desc">MetaTrader 5 indicator library</div>
+          <div class="project-meta">MQL5</div>
+        </div>
+      </a>
     </div>
 
-    <!-- Row 4: Architecture -->
-    <div class="grid gap-px flex-none" style="grid-template-columns: 1fr; background: oklch(from var(--border) l c h / 0.15);">
-      <div class="bg-[var(--bg)] p-10 flex flex-col items-center text-center relative overflow-hidden"
-           style="background: radial-gradient(ellipse at 50% 50%, oklch(from var(--purple) l c h / 0.04) 0%, transparent 60%), var(--bg);">
-        <div class="text-xl font-bold mb-2">Architecture</div>
-        <div class="text-sm text-[var(--text-muted)] mb-8">Adapter → Runtime → Processor. You bring the first and last.</div>
-        <div class="arch-flow flex items-center gap-4 font-mono text-sm flex-wrap justify-center">
-          <div class="px-5 py-3 rounded-[10px] border border-[var(--border)] backdrop-blur-sm font-medium"
-               style="background: var(--glass);">
-            Adapter<br><small class="text-[var(--text-muted)]">your choice</small>
-          </div>
-          <span class="arch-arrow text-[var(--text-muted)] text-xl">→</span>
-          <div class="px-5 py-3 rounded-[10px] border backdrop-blur-sm font-medium"
-               style="background: var(--glass); border-color: oklch(from var(--purple) l c h / 0.3); color: var(--purple);">
-            EVOID Runtime<br><small class="text-[var(--text-muted)]">Intent → Pipeline</small>
-          </div>
-          <span class="arch-arrow text-[var(--text-muted)] text-xl">→</span>
-          <div class="px-5 py-3 rounded-[10px] border backdrop-blur-sm font-medium"
-               style="background: var(--glass); border-color: oklch(from var(--emerald) l c h / 0.3); color: var(--emerald);">
-            Processor<br><small class="text-[var(--text-muted)]">your logic</small>
-          </div>
+    <div class="bento-row row-footer">
+      <div class="cell cell-footer">
+        <span>© 2026 EvolveBeyond</span>
+        <div class="footer-links">
+          <a href="https://github.com/EvolveBeyond">GitHub</a>
+          <a href="https://evolvebeyond.github.io/EVOID/">EVOID Docs</a>
+          <a href="mailto:pakrohk@gamil.com">Contact</a>
         </div>
       </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="relative h-px bg-[var(--border)]">
-      <span class="absolute right-0 top-1/2 w-2 h-2 rounded-full bg-[var(--purple)] -translate-y-1/2"
-            style="box-shadow: 0 0 8px oklch(from var(--purple) l c h / 0.4);"></span>
-    </div>
-
-    <!-- Row 5: Links -->
-    <div class="bento-links grid gap-px flex-none" style="grid-template-columns: repeat(4, 1fr); background: oklch(from var(--border) l c h / 0.15);">
-      <a href="https://evolvebeyond.github.io/EVOID/" class="link-cell bg-[var(--bg)] py-5 text-center text-sm font-medium text-[var(--text-muted)] no-underline transition-all border-r border-[oklch(from var(--border) l c h /_0.15)] hover:text-[var(--purple)] hover:bg-[oklch(from var(--purple) l c h /_0.03)]">Documentation</a>
-      <a href="https://github.com/EvolveBeyond/EVOID" class="link-cell bg-[var(--bg)] py-5 text-center text-sm font-medium text-[var(--text-muted)] no-underline transition-all border-r border-[oklch(from var(--border) l c h /_0.15)] hover:text-[var(--purple)] hover:bg-[oklch(from var(--purple) l c h /_0.03)]">Source Code</a>
-      <a href="https://evolvebeyond.github.io/EVOID/admin/" class="link-cell bg-[var(--bg)] py-5 text-center text-sm font-medium text-[var(--text-muted)] no-underline transition-all border-r border-[oklch(from var(--border) l c h /_0.15)] hover:text-[var(--purple)] hover:bg-[oklch(from var(--purple) l c h /_0.03)]">Docs Editor</a>
-      <a href="mailto:pakrohk@gamil.com" class="link-cell bg-[var(--bg)] py-5 text-center text-sm font-medium text-[var(--text-muted)] no-underline transition-all hover:text-[var(--purple)] hover:bg-[oklch(from var(--purple) l c h /_0.03)]">Contact</a>
     </div>
   </div>
-
-  <!-- Footer -->
-  <div class="py-6 text-center border-t border-[var(--border)] text-sm text-[var(--text-muted)]">
-    © 2026 <a href="https://github.com/EvolveBeyond" class="text-[var(--purple)] no-underline">EvolveBeyond</a> — Beyond Evolution
-  </div>
-
-  <script>
-    const toggle = document.getElementById('theme-toggle')!;
-    toggle.addEventListener('click', () => {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    });
-    if (localStorage.getItem('theme') === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  </script>
 </body>
 </html>
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --fg: #e0e0e0;
+    --fg-dim: #555;
+    --border: #1a1a1a;
+    --cell: rgba(10, 10, 10, 0.85);
+    --cell-hover: rgba(20, 20, 20, 0.9);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .bg-axolotl {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vmin;
+    height: 80vmin;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    object-fit: contain;
+    filter: invert(1);
+  }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(24px);
+    z-index: 100;
+  }
+  .nav-inner {
+    width: 100%; height: 100%;
+    padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; font-size: 0.8rem;
+    color: var(--fg); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.25rem; }
+  .nav-links a {
+    color: var(--fg-dim); text-decoration: none;
+    font-size: 0.75rem; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--fg); }
+
+  .bento {
+    position: relative; z-index: 1;
+    width: 100%;
+    padding: 48px 0 0;
+    display: flex; flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .bento-row { display: grid; gap: 1px; background: var(--border); }
+  .cell {
+    background: var(--cell);
+    padding: 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  .cell-hero {
+    grid-column: 1 / -1;
+    padding: 6rem 3rem;
+    align-items: center; text-align: center;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--fg-dim);
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 300; letter-spacing: -0.04em;
+    line-height: 1.1; margin-bottom: 1.5rem; max-width: 650px;
+  }
+  .hero h1 strong { font-weight: 700; }
+  .hero-desc {
+    font-size: 0.95rem; color: var(--fg-dim);
+    max-width: 480px; line-height: 1.8; font-weight: 300;
+  }
+
+  .row-3 { grid-template-columns: repeat(3, 1fr); }
+  .cell-value { padding: 2rem; }
+  .cell-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; color: var(--fg-dim); margin-bottom: 1rem;
+  }
+  .cell-value h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .cell-value p { font-size: 0.75rem; color: var(--fg-dim); line-height: 1.7; font-weight: 300; }
+
+  .row-roadmap { grid-template-columns: 1fr; }
+  .cell-roadmap { padding: 3rem; }
+  .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 1.5rem; }
+  .roadmap-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--fg-dim); margin-bottom: 0.75rem; }
+  .roadmap-dot--active { background: var(--fg); }
+  .roadmap-year { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--fg-dim); margin-bottom: 0.5rem; }
+  .roadmap-item h4 { font-size: 0.8rem; font-weight: 500; margin-bottom: 0.35rem; }
+  .roadmap-item p { font-size: 0.7rem; color: var(--fg-dim); line-height: 1.6; font-weight: 300; }
+
+  .row-projects { grid-template-columns: 1fr 1fr; }
+  .cell-project {
+    padding: 2rem; text-decoration: none; color: var(--fg);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .project-name { font-size: 1rem; font-weight: 500; margin-bottom: 0.35rem; }
+  .project-desc { font-size: 0.75rem; color: var(--fg-dim); font-weight: 300; line-height: 1.6; }
+  .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--fg-dim); margin-top: 1rem; }
+
+  .row-footer { grid-template-columns: 1fr; }
+  .cell-footer { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--fg-dim); }
+  .footer-links { display: flex; gap: 1.25rem; }
+  .footer-links a { color: var(--fg-dim); text-decoration: none; }
+  .footer-links a:hover { color: var(--fg); }
+
+  @media (max-width: 768px) {
+    .row-3 { grid-template-columns: 1fr; }
+    .row-projects { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
+    .cell-hero { padding: 4rem 1.5rem; }
+    .nav-links { display: none; }
+    .cell-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
